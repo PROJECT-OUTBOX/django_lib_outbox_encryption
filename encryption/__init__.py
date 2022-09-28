@@ -70,7 +70,14 @@ class OutboxEncryption:
 
         # 1. Read ALL data
         file_path = os.path.join(self.BASE_DIR, env_name)
-        print(file_path)
+
+        # create file if not exists
+        if not Path(file_path).is_file():
+            with open(file_path, "w") as f:
+                f.write('\n') 
+            print('File is created')
+
+        # print(file_path)
         with open(file_path, "r") as f:
             for line in f.readlines():                
                 values = line.split('=')
@@ -141,6 +148,13 @@ class OutboxEncryption:
             env_config = Config(RepositoryEnv(self.BASE_DIR / self.env_server))
             file_path = os.path.join(self.BASE_DIR, self.env_server)
             print('Load Setting From env.server')
+
+        # create file if not exists
+        print('File not exists')
+        if not Path(file_path).is_file():
+            with open(file_path, "w") as f:
+                f.write('\n') 
+            print('File is created')
 
         # Get ALL env_config data
         dict1 = {}        

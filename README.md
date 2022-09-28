@@ -1,22 +1,24 @@
 # DJANGO OUTBOX ENCRYPTION
---------------------------
 
-Use For Encrypt Environment Variable and Other Encryption Purpose.
+Sometimes, when you ready to publish your project to server. 
+
+There is a slight change between the application settings on the local and the server.
+Such as database name, password, etc.
+The second thing, is you need to encrypt information like password or other.
+The last one, you need to automatically select setting local when you work on local computer, and auto select server when application running on server.
+
+You are on the right path...
 
 
-#####
-
-Install to your environment :
+## Install package to your environment
     > pip install outbox-encryption
 
-How to use :
-------------
-    This code for create .env.client file
+## How to use 
 
-    Test using python shell :
+### Encrypt to environment
+    This code for create ".env.client" or ".env.server" file    
     > python manage.py shell
 
-    Encryption Process :
     > from encryption import OutboxEncryption
     > lib = OutboxEncryption()
     > mplaint_text = {
@@ -24,28 +26,30 @@ How to use :
             'SECRET_KEY': 'xxg_7me8rl2m#a_h2oresgt2#ni=3_4*!ai*=rtsq)yi!g7_5-51xx'
         }
     > lib.encrypt_environ('.env.local', mplaint_text)
-    > print('Show Hidden File to Show .env.local')  # file .env.local is created
+    # file .env.local is created (maybe file is hidden, CTRL+H to show it)
 
-
-    Decryption Process :
+### Decrypt from environment 
     Run inside settings.py (django project settings)            
-    > lib.set_keyword_local('env_outbox_encrypt')   # this is use for local environment, env_outbox_encrypt only exists in local, not in server
-    > mplaint_key = list(mplaint_text.keys())   # List of key variable that must be encrypt decrypt before set or get data
-    > mplaint_list = ['ALLOWED_HOSTS']    # variable that must be cast as list from environmnet to settings.py
-    > mplaint_tuple = ['SECURE_PROXY_SSL_HEADER']   # variable that must be casr 
-    as tuple from environment to settings.py
-
-    # mplaint_list and mplaint_tuple is optional
-    > lib.decrypt_environ(mplaint_key, mplaint_list, mplaint_tuple)
-
-    
-    # Inside settings.py
     > from encryption import OutboxEncryption
+    > lib = OutboxEncryption()
+
+    Setting unique variable tha only exists in local environment, and not exist in server 
+    We choose env_outbox_encrypt
+    > lib.set_keyword_local('env_outbox_encrypt')
+
+    List of key variable that must be encrypt or decrypt before set or get data
     > mplaint_key = ['DB_PASSWORD', 'SECRET_KEY']
+
+    Variable that must be cast as list from environmnet to settings.py
     > mplaint_list = ['ALLOWED_HOSTS']
+
+    Variable that must be cast as tuple from environment to settings.py
     > mplaint_tuple = ['SECURE_PROXY_SSL_HEADER']
 
+    Get encryption data
     > dict1 = lib.decrypt_environ(mplaint_key, mplaint_list, mplaint_tuple)
+
+    Setting variable :
     > DEBUG = dict1['DEBUG']
     > UNDER_CONSTRUCTION = dict1['UNDER_CONSTRUCTION']
     > DEBUG = dict1['DEBUG']
@@ -61,4 +65,7 @@ How to use :
             'PORT'      : dict1['DB_POST'],
         }
     > SECURE_PROXY_SSL_HEADER = dict1['SECURE_PROXY_SSL_HEADER']
-}
+
+
+    
+    
