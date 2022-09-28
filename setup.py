@@ -32,6 +32,12 @@ setup(
     # EITHER py_modules OR packages should be present.
     packages=find_packages(exclude="tests"),
 
+    # dependencies
+    install_requires=[
+        'cryptography',
+        'python-decouple',
+    ],
+
     # The description that will be shown on PyPI.
     # Keep it short and concise
     # This field is OPTIONAL

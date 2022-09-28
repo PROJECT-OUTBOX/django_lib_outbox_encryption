@@ -2,9 +2,6 @@
 #   https://www.geeksforgeeks.org/fernet-symmetric-encryption-using-cryptography-module-in-python/
 #   https://able.bio/rhett/how-to-set-and-get-environment-variables-in-python--274rgt5
 
-#   Write to Env Variable using
-#   https://help.pythonanywhere.com/pages/environment-variables-for-web-apps/
-
 import binascii
 import os
 from io import StringIO
@@ -12,7 +9,6 @@ from pathlib import Path
 
 from cryptography.fernet import Fernet  # pip install cryptography
 from decouple import Config, Csv, RepositoryEnv  # pip install python-decouple
-# from dotenv import load_dotenv  # pip install python-dotenv
 
 
 class OutboxEncryption:
