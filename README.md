@@ -33,7 +33,7 @@ You are on the right path...
     > from encryption import OutboxEncryption
     > lib = OutboxEncryption()
 
-    Setting unique variable tha only exists in local environment, and not exist in server 
+    Setting unique variable that only exists in local environment, and not exist in server 
     We choose env_outbox_encrypt
     > lib.set_keyword_local('env_outbox_encrypt')
 

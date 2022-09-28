@@ -137,6 +137,20 @@ class OutboxEncryption:
         env_list = os.environ.get(self.env_list)
         is_run_from_server = True
 
+        # create file if not exists        
+        # create sebelum dibaca oleh RepositoryEnv di path tersebut jika tidak ada file maka akan muncul error
+        file_path = self.BASE_DIR / self.env_local
+        if not Path().is_file():
+            with open(file_path, "w") as f:
+                f.write('\n') 
+            print('File is created')
+
+        file_path = self.BASE_DIR / self.env_server
+        if not Path(file_path).is_file():
+            with open(file_path, "w") as f:
+                f.write('\n') 
+            print('File is created')
+
         if env_list:
             if self.keyword_local in env_list:
                 env_config = Config(RepositoryEnv(self.BASE_DIR / self.env_local))
@@ -148,13 +162,7 @@ class OutboxEncryption:
             env_config = Config(RepositoryEnv(self.BASE_DIR / self.env_server))
             file_path = os.path.join(self.BASE_DIR, self.env_server)
             print('Load Setting From env.server')
-
-        # create file if not exists
-        print('File not exists')
-        if not Path(file_path).is_file():
-            with open(file_path, "w") as f:
-                f.write('\n') 
-            print('File is created')
+        
 
         # Get ALL env_config data
         dict1 = {}        
