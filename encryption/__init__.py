@@ -140,7 +140,7 @@ class OutboxEncryption:
         # create file if not exists        
         # create sebelum dibaca oleh RepositoryEnv di path tersebut jika tidak ada file maka akan muncul error
         file_path = self.BASE_DIR / self.env_local
-        if not Path().is_file():
+        if not Path(file_path).is_file():
             with open(file_path, "w") as f:
                 f.write('\n') 
             print('File is created')
