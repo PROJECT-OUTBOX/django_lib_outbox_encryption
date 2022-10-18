@@ -1,4 +1,10 @@
-Revisi di library :
+Revisi di library v1.0.6:
+1.  BASE_DIR
+    base dir akan mengacu ke lokasi library aktif yaitu :  /home/iwan/.virtualenv/django-outbox-dev/lib/python3.10/site-packages/.env.local
+    Solusinya gunakan BASE_DIR dari file setting.py project django
+    
+
+Revisi di library v1.0.5:
 1.  Path
     path jika tidak di masukkan lengkap file message file create, tetapi di cek file tidak di temukan :             [OK] Need advance testing
     Kemungkinan Path tidak perlu, hanya perlu create file awal saja jika file tidak ditemukan di folder

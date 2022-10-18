@@ -19,10 +19,13 @@ class OutboxEncryption:
     BASE_DIR = ''
 
     # constructor
-    def __init__(self):
+    def __init__(self, base_dir=None):
         self.keyword_local = 'env_opd'
-        self.BASE_DIR = Path(__file__).resolve().parent.parent
-        pass        
+        if not base_dir:
+            self.BASE_DIR = Path(__file__).resolve().parent.parent
+        else:
+            self.BASE_DIR = base_dir
+        # pass        
     
     def bytes2hex(self, bytes_text):
         res_hex = binascii.hexlify(bytes_text)
@@ -134,6 +137,8 @@ class OutboxEncryption:
                     f.write(keys[i] + '=' + values[i] + '\n') 
 
             f.close()
+
+        print('File is create on :', file_path)
             
     def decrypt_environ(self, mplaint_key, mplaint_list=[], mplaint_tuple=[]): #, env_name, cipher_text, key_hex):
         '''        
@@ -186,6 +191,8 @@ class OutboxEncryption:
             print('Load Setting From env.server')
         
 
+
+        print('File is load from :', file_path)
         # Get ALL env_config data
         dict1 = {}        
         with open(file_path, "r") as f:
