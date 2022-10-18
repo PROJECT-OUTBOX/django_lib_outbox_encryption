@@ -28,6 +28,21 @@ You are on the right path...
     > lib.encrypt_environ('.env.local', mplaint_text)
     # file .env.local is created (maybe file is hidden, CTRL+H to show it)
 
+    # Open file .env.local
+        You have to write other setting that no encrypt apply, such as:
+        DEBUG=True
+        UNDER_CONSTRUCTION=False
+        DB_ENGINE=django.db.backends.mysql
+        DB_NAME=db_name
+        DB_USER=root
+        DB_HOST=127.0.0.1
+        DB_PORT=3306
+
+#### Note:
+    File .env.local must be :
+        .env.local or
+        .env.server (nothing else)
+
 ### Decrypt from environment 
     Run inside settings.py (django project settings)            
     > from encryption import OutboxEncryption
@@ -65,6 +80,7 @@ You are on the right path...
             'PORT'      : dict1['DB_POST'],
         }
     > SECURE_PROXY_SSL_HEADER = dict1['SECURE_PROXY_SSL_HEADER']
+
 
 
     

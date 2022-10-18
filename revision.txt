@@ -1,0 +1,11 @@
+Revisi di library :
+1.  Path
+    path jika tidak di masukkan lengkap file message file create, tetapi di cek file tidak di temukan :             [OK] Need advance testing
+    Kemungkinan Path tidak perlu, hanya perlu create file awal saja jika file tidak ditemukan di folder
+    lib.encrypt_environ('/home/iwan/Documents/Django/proj_outbox/django-outbox-dev/django_outbox/.env.local',text)
+
+2.  File yg tidak di enkripsi di tulis manual, belum ada di panduan                                                 [OK]
+
+3.  Variable "hasilnya" dihilangkan saat berhasil menjalankan libraray (for security Reason)                        [OK]
+
+

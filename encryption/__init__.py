@@ -70,12 +70,18 @@ class OutboxEncryption:
 
         # 1. Read ALL data
         file_path = os.path.join(self.BASE_DIR, env_name)
+        # print('file_path =', file_path, Path(file_path).is_file())
 
         # create file if not exists
         if not Path(file_path).is_file():
             with open(file_path, "w") as f:
                 f.write('\n') 
-            print('File is created')
+                f.close()
+
+            if Path(file_path).is_file():
+                print('File is created')
+            else:
+                print('Fail create!')
 
         # print(file_path)
         with open(file_path, "r") as f:
@@ -83,12 +89,14 @@ class OutboxEncryption:
                 values = line.split('=')
                 if len(values) > 1:                    
                     dict1[values[0]] = values[1]
+
+            f.close()
                 
         # 2. Encrypt data        
         key = self.generate_key()
-        print(key)
+        # print(key)
         key_in_hex = self.bytes2hex(key)
-        print(key_in_hex)
+        # print(key_in_hex)
 
         # get key, value from parameter (plain_text)
         values = list(plain_text.values())        
@@ -124,6 +132,8 @@ class OutboxEncryption:
                     f.write(keys[i] + '=' + values[i])
                 else:
                     f.write(keys[i] + '=' + values[i] + '\n') 
+
+            f.close()
             
     def decrypt_environ(self, mplaint_key, mplaint_list=[], mplaint_tuple=[]): #, env_name, cipher_text, key_hex):
         '''        
@@ -143,13 +153,25 @@ class OutboxEncryption:
         if not Path(file_path).is_file():
             with open(file_path, "w") as f:
                 f.write('\n') 
-            print('File is created')
+                f.close()               
+
+            if Path(file_path).is_file(): 
+                print('File is created')
+            else:
+                print('Fail create!')
 
         file_path = self.BASE_DIR / self.env_server
         if not Path(file_path).is_file():
             with open(file_path, "w") as f:
                 f.write('\n') 
-            print('File is created')
+                f.close()
+
+            if Path(file_path).is_file(): 
+                print('File is created')
+            else:
+                print('Fail create!')
+
+            # print('File is created')
 
         if env_list:
             if self.keyword_local in env_list:
@@ -171,6 +193,7 @@ class OutboxEncryption:
                 values = line.split('=')
                 if len(values) > 1:                    
                     dict1[values[0]] = values[1].replace('\n','')
+            f.close()
 
         # print(dict1)
         keys = list(dict1.keys())
@@ -215,7 +238,7 @@ class OutboxEncryption:
 
             # selain kondisi di atas, biarkan apa adanya (default = string)
 
-        print('hasilnya = ', dict1)
+        # print('hasilnya = ', dict1)
         return dict1
             
 
