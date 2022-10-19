@@ -76,8 +76,8 @@ You are on the right path...
             'NAME'      : dict1['DB_NAME'],
             'USER'      : dict1['DB_USER'],
             'PASSWORD'  : dict1['DB_PASSWORD'],
-            'HOST'      : dict1['DB_HOSTS'],
-            'PORT'      : dict1['DB_POST'],
+            'HOST'      : dict1['DB_HOST'],
+            'PORT'      : dict1['DB_PORT'],
         }
     > SECURE_PROXY_SSL_HEADER = dict1['SECURE_PROXY_SSL_HEADER']
 

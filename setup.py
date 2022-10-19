@@ -19,7 +19,7 @@ setup(
     # eg: 1.0.0, 1.0.1, 3.0.2, 5.0-beta, etc.
     # You CANNOT upload two versions of your package with the same version number
     # This field is REQUIRED
-    version="1.0.6",
+    version="1.0.7",
 
 
     # The packages that constitute your project.
@@ -31,6 +31,9 @@ setup(
     # you can instead use the py_modules field instead.
     # EITHER py_modules OR packages should be present.
     packages=find_packages(exclude="tests"),
+
+    # agar file manifest .in dieksekusi
+    include_package_data = True,
 
     # dependencies
     install_requires=[
@@ -70,7 +73,8 @@ setup(
     # https://pypi.org/classifiers
     # This is OPTIONAL
     classifiers=[
-        "License :: OSI Approved :: MIT License",
+        # "License :: OSI Approved :: MIT License",   
+        "License :: OSI Approved :: BSD License",     
         "Intended Audience :: Developers",
         "Programming Language :: Python :: 3 :: Only"
     ],

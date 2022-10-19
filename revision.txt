@@ -1,8 +1,15 @@
+Revisi v1.0.7
+1.  File readme.md                                                                                                  [OK]
+    dict1['DB_HOSTS'],      -> DB_HOST
+    dict1['DB_POST'],       -. DB_PORT
+    
+2.  File File is load from : /mnt/Data/Documents/Django/proj_outbox/django-outbox-dev/django_outbox/.env.local      [OK]
+    dihapus untuk keamanan
+
 Revisi di library v1.0.6:
-1.  BASE_DIR
+1.  BASE_DIR                                                                                                        [OK]
     base dir akan mengacu ke lokasi library aktif yaitu :  /home/iwan/.virtualenv/django-outbox-dev/lib/python3.10/site-packages/.env.local
     Solusinya gunakan BASE_DIR dari file setting.py project django
-    
 
 Revisi di library v1.0.5:
 1.  Path

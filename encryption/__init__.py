@@ -85,6 +85,8 @@ class OutboxEncryption:
                 print('File is created')
             else:
                 print('Fail create!')
+        else:
+            print('Fail updated!')
 
         # print(file_path)
         with open(file_path, "r") as f:
@@ -164,6 +166,8 @@ class OutboxEncryption:
                 print('File is created')
             else:
                 print('Fail create!')
+        # else:
+        #     print('Fail updated!')
 
         file_path = self.BASE_DIR / self.env_server
         if not Path(file_path).is_file():
@@ -191,8 +195,7 @@ class OutboxEncryption:
             print('Load Setting From env.server')
         
 
-
-        print('File is load from :', file_path)
+        # print('File is load from :', file_path)
         # Get ALL env_config data
         dict1 = {}        
         with open(file_path, "r") as f:
