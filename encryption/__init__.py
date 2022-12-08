@@ -255,7 +255,7 @@ class OutboxEncryption:
                 env_list_split = []
                 env_list_split2 = [] # karena ada tag pembuka dan penutup, maka split 2 kali
 
-                # print('preses ', self.env_list[j])
+                print('preses ', self.env_list[j])
                 env_list = os.getenv(self.env_list[j]) # PS1 atau VENV
                 # env_list = os.environ.get(self.env_list[j]) # PS1 atau VENV
                 is_found = False
@@ -386,8 +386,8 @@ class OutboxEncryption:
                     # print('hasilnya = ', dict1)
                     return dict1
                 else:
-                    # print('Activate environment first!')
-                    raise Exception("Please set keyword_local fisrt!")
+                    print('Activate environment first!')
+                    # raise Exception("Please set keyword_local fisrt!")
                 
 
 # test module level
