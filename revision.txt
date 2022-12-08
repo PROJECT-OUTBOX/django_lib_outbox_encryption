@@ -1,3 +1,6 @@
+Revisi v1.0.8
+1. Ubah variable menjadi list agar support setting lebih dari 1 di local dan lebih dari satu di server              [OK]
+
 Revisi v1.0.7
 1.  File readme.md                                                                                                  [OK]
     dict1['DB_HOSTS'],      -> DB_HOST
