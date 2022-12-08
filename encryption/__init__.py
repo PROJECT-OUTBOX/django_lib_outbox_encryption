@@ -108,7 +108,8 @@ class OutboxEncryption:
             if Path(file_path).is_file():
                 print('File is created')
             else:
-                print('Fail create!')
+                raise Exception("Fail create directory!")
+                # print('Fail create!')
         # else:
         #     print('Fail updated!')
 
@@ -132,7 +133,8 @@ class OutboxEncryption:
                 # {etc: etc..}
         '''
         if not self.keyword_local:
-            print("Please set keyword_local fisrt!")
+            # print("Please set keyword_local fisrt!")
+            raise Exception("Please set keyword_local fisrt!")
         else:
             
             file_path  = []
@@ -228,7 +230,9 @@ class OutboxEncryption:
 
         # env_list = os.environ.get(self.env_list)
         if not self.keyword_local:
-            print("Please set keyword_local fisrt!")
+            # print("Please set keyword_local fisrt!")
+            raise Exception("Please set keyword_local fisrt!")
+            # Fail create!
         else:
             
             file_path  = []
@@ -382,7 +386,8 @@ class OutboxEncryption:
                     # print('hasilnya = ', dict1)
                     return dict1
                 else:
-                    print('Activate environment first!')
+                    # print('Activate environment first!')
+                    raise Exception("Please set keyword_local fisrt!")
                 
 
 # test module level
