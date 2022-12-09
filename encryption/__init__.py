@@ -36,7 +36,6 @@ class OutboxEncryption:
                 Cari identifier sama persis data di atas
     '''
 
-
     keyword_local = []              # keyword must be only exist in local, if not assumtion script run in server
     # keyword_server = []             # agar bisa setting server 1 dan server 2 berbeda
 
@@ -255,7 +254,7 @@ class OutboxEncryption:
                 env_list_split = []
                 env_list_split2 = [] # karena ada tag pembuka dan penutup, maka split 2 kali
 
-                print('preses ', self.env_list[j])
+                # print('proses ', self.env_list[j])
                 env_list = os.getenv(self.env_list[j]) # PS1 atau VENV
                 # env_list = os.environ.get(self.env_list[j]) # PS1 atau VENV
                 is_found = False
