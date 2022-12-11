@@ -243,7 +243,7 @@ class OutboxEncryption:
             for i in range(len(self.keyword_local)):                
                 find_env_name.append(self.string_replace(self.keyword_local[i]))
                 tmp = self.env_name + '.' + find_env_name[i]
-                print('find_env_name = ' , tmp)
+                # print('find_env_name = ' , tmp)
                 file_path.append(os.path.join(self.BASE_DIR, tmp))
                 # print('file_path =', file_path, Path(file_path).is_file())
                 
@@ -260,7 +260,7 @@ class OutboxEncryption:
                 # print('proses ', self.env_list[j])
                 env_list = os.getenv(self.env_list[j]) # PS1 atau VENV
                 # env_list = os.environ.get(self.env_list[j]) # PS1 atau VENV
-                print('env_list=',env_list)
+                # print('env_list=',env_list)
                 is_found = False
                 file_path_idx = 0
 
@@ -276,7 +276,10 @@ class OutboxEncryption:
                             env_list_split2.append(self.string_replace_env(k))  # clear tanda (()) di dalam env
 
 
-                print('env_list_split2',env_list_split2)
+                # env_list_split2 jadi kunci
+                #  akan di komprare dengan data env real di server dengan karekter (()) replace menjadi spasi kosong
+                # dan karakter / di replace menjadi _
+                # print('env_list_split2',env_list_split2)
 
                 # create file if not exists        
                 # create sebelum dibaca oleh RepositoryEnv di path tersebut jika tidak ada file maka akan muncul error
