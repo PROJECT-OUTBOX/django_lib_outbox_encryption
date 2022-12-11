@@ -122,6 +122,7 @@ class OutboxEncryption:
     def string_replace_env(self, keyword):
         res = keyword.replace('(','')
         res = res.replace(')','')        
+        res = res.replace('/','_')        
         return res.strip()
 
     def encrypt_environ(self, plain_text):
