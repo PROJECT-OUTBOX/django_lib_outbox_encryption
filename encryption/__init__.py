@@ -116,6 +116,7 @@ class OutboxEncryption:
         res = keyword.replace('-','_')
         res = res.replace(':','_')
         res = res.replace('.','_')
+        res = res.replace('/','_') # baru untuk versi 3.8 Python
         return res
 
     def string_replace_env(self, keyword):
