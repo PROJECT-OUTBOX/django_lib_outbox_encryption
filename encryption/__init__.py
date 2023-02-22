@@ -145,7 +145,7 @@ class OutboxEncryption:
                 tmp = self.env_name + '.' + self.string_replace(self.keyword_local[i])
                 file_path.append(os.path.join(self.BASE_DIR, tmp))
                 # print('file_path =', file_path, Path(file_path).is_file())
-                
+                print('file_path[i]=', file_path[i])
                 # create file if not exists
                 self.create_env_file(file_path[i])
                 
@@ -243,10 +243,14 @@ class OutboxEncryption:
             for i in range(len(self.keyword_local)):                
                 find_env_name.append(self.string_replace(self.keyword_local[i]))
                 tmp = self.env_name + '.' + find_env_name[i]
-                # print('find_env_name = ' , tmp)
+                
+                print('find_env_name = ' , tmp)
+                print('path lengkap=', os.path.join(self.BASE_DIR, tmp))
+
                 file_path.append(os.path.join(self.BASE_DIR, tmp))
                 # print('file_path =', file_path, Path(file_path).is_file())
                 
+                print('create file if not exists', file_path[i])
                 # create file if not exists
                 self.create_env_file(file_path[i])
 
