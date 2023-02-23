@@ -263,7 +263,7 @@ class OutboxEncryption:
                 env_list_split = []
                 env_list_split2 = [] # karena ada tag pembuka dan penutup, maka split 2 kali
 
-                # print('proses ', self.env_list[j])
+                print('proses ', self.env_list[j])
                 env_list = os.getenv(self.env_list[j]) # PS1 atau VENV
                 print('env_list=',env_list)
                 # env_list = os.environ.get(self.env_list[j]) # PS1 atau VENV
