@@ -41,7 +41,8 @@ class OutboxEncryption:
 
     # PS1 for environmnet linux
     # VENV for environment windows
-    env_list = ['PS1', 'VENV', 'PYENV_VERSION'] # os.environ.get("PS1") --> list of environment
+    # env_list = ['PS1', 'VENV', 'PYENV_VERSION'] # os.environ.get("PS1") --> list of environment
+    env_list = ['VENV2'] # os.environ.get("PS1") --> list of environment
     # env_local = '.env.local'        # environment name local    (DELETE pending)
     # env_server = '.env.server'      # environment name server   (DELETE pending)
     env_name = '.env'               # + keyword_local (after string replace all symbol to _)
