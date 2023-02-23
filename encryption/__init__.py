@@ -319,7 +319,8 @@ class OutboxEncryption:
                 if env_list:
                     file_path_idx = -1
                     for i in self.keyword_local:
-                        # print('i=',i)
+                        print('keyword_local=',i)
+                        print('data=', env_list_split2)
                         file_path_idx += 1
                         if i in env_list_split2:
                             # env_config = Config(RepositoryEnv(self.BASE_DIR / self.env_local))
