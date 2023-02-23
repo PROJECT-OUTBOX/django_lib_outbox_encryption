@@ -258,12 +258,14 @@ class OutboxEncryption:
             # print('file_path = ',file_path)
 
             # Baca data dari variable ENV, jika ketemu data dari list (keyword_local) maka load data dari file itu
+            print('self.env_list=',self.env_list)
             for j in range(len(self.env_list)):   
                 env_list_split = []
                 env_list_split2 = [] # karena ada tag pembuka dan penutup, maka split 2 kali
 
                 # print('proses ', self.env_list[j])
                 env_list = os.getenv(self.env_list[j]) # PS1 atau VENV
+                print('env_list=',env_list)
                 # env_list = os.environ.get(self.env_list[j]) # PS1 atau VENV
                 # print('env_list=',env_list)
                 is_found = False
