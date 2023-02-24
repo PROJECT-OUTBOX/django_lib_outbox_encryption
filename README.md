@@ -13,10 +13,22 @@ You are on the right path...
 ## Install package to your environment
     > pip install outbox-encryption
 
+## How it works
+    On developing time, library will scan your environment variable
+    to get file name specific for you computer, for example : .env-outbox-python
+    this file must exists on your source code to make application continue.
+
+    On deploy time, for example your local computer, library again will scan your
+    environment variable and get file name base on computer where it running
+
+    if file found, application continue, else stop application
+
+    if you ready to deploy to server, just rename file .env-outbox-python to name 
+    which is must be found on server
+
 ## How to use 
 
-### Encrypt to environment
-    This code for create ".env.client" or ".env.server" file    
+### Create Encrypt File    
     > python manage.py shell
 
     > from encryption import OutboxEncryption
@@ -25,8 +37,8 @@ You are on the right path...
             'DB_PASSWORD': '',
             'SECRET_KEY': 'xxg_7me8rl2m#a_h2oresgt2#ni=3_4*!ai*=rtsq)yi!g7_5-51xx'
         }
-    > lib.encrypt_environ('.env.local', mplaint_text)
-    # file .env.local is created (maybe file is hidden, CTRL+H to show it)
+    > lib.enc_environ(mplaint_text)
+    # new file is created (maybe file is hidden, CTRL+H to show it)
 
     # Open file .env.local
         You have to write other setting that no encrypt apply, such as:
@@ -39,48 +51,82 @@ You are on the right path...
         DB_PORT=3306
 
 #### Note:
-    File .env.local must be :
-        .env.local or
-        .env.server (nothing else)
+    File name auto create base on environment variable on running computer.
+    If run on server just rename this file, and write setting needed to run website on server
 
-### Decrypt from environment 
+### Decrypt environment file
+    > python manage.py shell
+
+    > from encryption import OutboxEncryption
+    > lib = OutboxEncryption()
+
+    > mplaint_key = {
+        'DB_PASSWORD',
+        'SECRET_KEY'
+        }
+    > mplaint_list = {
+        'ALLOWED_HOSTS',
+        'CSRF_TRUSTED_ORIGINS'
+        }
+    > key = lib.dec_environ(mplaint_key, mplaint_list)
+    > print (key)
+
+### Change your settings.py file
     Run inside settings.py (django project settings)            
     > from encryption import OutboxEncryption
     > lib = OutboxEncryption()
 
-    Setting unique variable that only exists in local environment, and not exist in server 
-    We choose env_outbox_encrypt
-    > lib.set_keyword_local('env_outbox_encrypt')
-
-    List of key variable that must be encrypt or decrypt before set or get data
+    # List of key variable that must be encrypt or decrypt before set or get data
     > mplaint_key = ['DB_PASSWORD', 'SECRET_KEY']
 
     Variable that must be cast as list from environmnet to settings.py
-    > mplaint_list = ['ALLOWED_HOSTS']
+    > mplaint_list = ['ALLOWED_HOSTS', 'CSRF_TRUSTED_ORIGINS']
 
     Variable that must be cast as tuple from environment to settings.py
     > mplaint_tuple = ['SECURE_PROXY_SSL_HEADER']
 
     Get encryption data
-    > dict1 = lib.decrypt_environ(mplaint_key, mplaint_list, mplaint_tuple)
+    > key = lib.decrypt_environ(mplaint_key, mplaint_list, mplaint_tuple)
 
     Setting variable :
-    > DEBUG = dict1['DEBUG']
-    > UNDER_CONSTRUCTION = dict1['UNDER_CONSTRUCTION']
-    > DEBUG = dict1['DEBUG']
-    > SECRET_KEY = dict1['SECRET_KEY']
-    > ALLOWED_HOSTS = dict1['ALLOWED_HOSTS']
-    > DATABASES = {
-        'default': {
-            'ENGINE'    : dict1['DB_ENGINE'],
-            'NAME'      : dict1['DB_NAME'],
-            'USER'      : dict1['DB_USER'],
-            'PASSWORD'  : dict1['DB_PASSWORD'],
-            'HOST'      : dict1['DB_HOST'],
-            'PORT'      : dict1['DB_PORT'],
-        }
-    > SECURE_PROXY_SSL_HEADER = dict1['SECURE_PROXY_SSL_HEADER']
+    > DEBUG = key['DEBUG']
+    > UNDER_CONSTRUCTION = key['UNDER_CONSTRUCTION']
+    > DEBUG = key['DEBUG']
+    > SECRET_KEY = key['SECRET_KEY']
+    > ALLOWED_HOSTS = key['ALLOWED_HOSTS']
 
+    > tmp_engine = key['DB_ENGINE']
+    > if 'sqlite3' in tmp_engine:
+        DATABASES = {
+            'default': {
+                'ENGINE': tmp_engine,                
+                'NAME': key['DB_NAME'],   # Path lengkap
+            }
+        }
+    > else: # default 
+    >   DATABASES = {
+            'default': {
+                'ENGINE'    : key['DB_ENGINE'],
+                'NAME'      : key['DB_NAME'],
+                'USER'      : key['DB_USER'],
+                'PASSWORD'  : key['DB_PASSWORD'],
+                'HOST'      : key['DB_HOST'],
+                'PORT'      : key['DB_PORT'],
+            }
+
+    > SECURE_PROXY_SSL_HEADER = key['SECURE_PROXY_SSL_HEADER']
+
+    # Optional:
+    > tmp = key.get('CSRF_TRUSTED_ORIGINS') 
+    > if tmp:
+    >   CSRF_TRUSTED_ORIGINS=key['CSRF_TRUSTED_ORIGINS']
+
+    # # use default value if setting not exists
+    > tmp = key.get('STATIC_ROOT')  # True if exists, None if not exists
+    > STATIC_ROOT = key['STATIC_ROOT'] if tmp else os.path.join(BASE_DIR, 'staticfiles')
+
+    > tmp = key.get('MEDIA_ROOT')
+    > MEDIA_ROOT = key['MEDIA_ROOT'] if tmp else os.path.join(BASE_DIR, 'media')
 
 
     
