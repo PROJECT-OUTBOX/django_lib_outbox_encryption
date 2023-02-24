@@ -9,7 +9,7 @@ from pathlib import Path
 
 from cryptography.fernet import Fernet              # pip install cryptography
 from decouple import Config, Csv, RepositoryEnv     # pip install python-decouple
-# from django.conf import settings
+from django.conf import settings
 
 
 class OutboxEncryption:
@@ -76,7 +76,7 @@ class OutboxEncryption:
     def __init__(self, base_dir=None):
         # self.keyword_local = ['env_opd'] # lets empty (for remainder user to insert keywordlocal)
         # self.keyword_server = ['env_opd', 'outbox', 'env_outbox']
-        # self.DEBUG = getattr(settings, "DEBUG", True)
+        self.DEBUG = getattr(settings, "DEBUG", True)
 
         if not base_dir:
             self.BASE_DIR = Path(__file__).resolve().parent.parent

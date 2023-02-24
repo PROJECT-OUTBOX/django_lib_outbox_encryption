@@ -19,7 +19,7 @@ setup(
     # eg: 1.0.0, 1.0.1, 3.0.2, 5.0-beta, etc.
     # You CANNOT upload two versions of your package with the same version number
     # This field is REQUIRED
-    version="1.1.0",    # 1.0.21 (versi akhir sebelum rombak rule)
+    version="1.1.1",    # 1.0.21 (versi akhir sebelum rombak rule)
 
 
     # The packages that constitute your project.

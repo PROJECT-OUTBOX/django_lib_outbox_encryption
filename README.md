@@ -40,8 +40,9 @@ You are on the right path...
     > lib.enc_environ(mplaint_text)
     # new file is created (maybe file is hidden, CTRL+H to show it)
 
-    # Open file .env.local
+    # Open new file that recently created
         You have to write other setting that no encrypt apply, such as:
+
         DEBUG=True
         UNDER_CONSTRUCTION=False
         DB_ENGINE=django.db.backends.mysql
@@ -72,7 +73,8 @@ You are on the right path...
     > print (key)
 
 ### Change your settings.py file
-    Run inside settings.py (django project settings)            
+    # Write inside settings.py (django project settings): 
+
     > from encryption import OutboxEncryption
     > lib = OutboxEncryption()
 
@@ -100,7 +102,7 @@ You are on the right path...
         DATABASES = {
             'default': {
                 'ENGINE': tmp_engine,                
-                'NAME': key['DB_NAME'],   # Path lengkap
+                'NAME': key['DB_NAME'],   # complete path 
             }
         }
     > else: # default 
