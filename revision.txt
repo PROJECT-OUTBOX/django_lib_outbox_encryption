@@ -1,3 +1,8 @@
+Revisi v1.1.2
+Tetapkan versi cryptography==38.0.1
+Jika tidak maka akan error :
+    ImportError: PyO3 modules may only be initialized once per interpreter process
+
 Revisi v1.0.8
 1. Ubah variable menjadi list agar support setting lebih dari 1 di local dan lebih dari satu di server              [OK]
 
