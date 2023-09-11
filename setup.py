@@ -19,7 +19,7 @@ setup(
     # eg: 1.0.0, 1.0.1, 3.0.2, 5.0-beta, etc.
     # You CANNOT upload two versions of your package with the same version number
     # This field is REQUIRED
-    version="1.1.2",    # 1.0.21 (versi akhir sebelum rombak rule)
+    version="1.1.3",    # 1.0.21 (versi akhir sebelum rombak rule)
 
 
     # The packages that constitute your project.
@@ -39,7 +39,9 @@ setup(
     # pastikan versi cryptography == 38.0.1
     # jika tidak maka akan error
     install_requires=[
-        'cryptography==38.0.1',
+        # 'cryptography==38.0.1',
+        # 'python-decouple==3.6',
+        'cryptography',
         'python-decouple',
     ],
 
