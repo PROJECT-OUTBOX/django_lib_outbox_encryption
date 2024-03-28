@@ -1,2 +1,2 @@
-cryptography==38.0.1
-python-decouple==3.6
+cryptography
+python-decouple

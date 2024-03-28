@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: outbox-encryption
-Version: 1.1.2
+Version: 1.1.3
 Summary: DJANGO OUTBOX ENCRYPTION
 Home-page: https://github.com/PROJECT-OUTBOX/django_lib_outbox_encryption.git
 Author-email: suratiwan03@gmail.com
@@ -10,6 +10,8 @@ Classifier: Intended Audience :: Developers
 Classifier: Programming Language :: Python :: 3 :: Only
 Description-Content-Type: text/markdown
 License-File: LICENSE.md
+Requires-Dist: cryptography
+Requires-Dist: python-decouple
 
 # DJANGO OUTBOX ENCRYPTION
 

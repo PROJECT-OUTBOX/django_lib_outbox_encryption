@@ -64,7 +64,10 @@ class OutboxEncryption:
     env_list = ['VENV2'] # os.environ.get("PS1") --> list of environment
 
     # scan semua variable ini dan tampilkan semua hasilnya ke interface
-    env_variable = ['LOGNAME', 'WINDOWID', '_', 'LOGONSERVER', 'HOMEPATH', 'USERNAME']
+    # WINDOWID berubah2 saat command prompt di jalankan maka di ganti dengan
+    # DESKTOP_SESSION (Update 29 Maret 2024)
+    # Ada tambahan USER (agar di kenali di server sebelum environment di aktifkan)
+    env_variable = ['LOGNAME', 'USER', 'DESKTOP_SESSION', '_', 'LOGONSERVER', 'HOMEPATH', 'USERNAME']
 
     # env_local = '.env.local'        # environment name local    (DELETE pending)
     # env_server = '.env.server'      # environment name server   (DELETE pending)
@@ -482,28 +485,50 @@ class OutboxEncryption:
 
 
     def scan_environment_variable(self):
-        res = '.env'                                        # jika semua kosong, maka paling tidak file .env harus ada
+        res = '.env'    # jika semua kosong, maka paling tidak file .env harus ada
+        res_arr = []    # tampung dulu ke variable array ini, untuk di ambil 3 kata pertama
+        res_arr.append(res)
+
         for i in range(len(self.env_variable)):   
             if self.DEBUG:
                 print('Proses env_variable -', str(i+1), self.env_variable[i])
 
+            # proses data dari path /home/manjaro/.virtualenvs/env_opd/bin/python
+            # di server data ini kosong juga
             split_char = ['/', ' ', ':', '\\', '.']
             tmp = os.getenv(self.env_variable[i]) 
+            print('tmp', tmp)
 
             tmp_arr = None
             if tmp:                                
                 tmp_arr = self.split_from_multiple_word(tmp, split_char)
             
             if tmp_arr:                
+                print('tmp_arr', tmp_arr)
                 if len(tmp_arr)>=3:
-                    res += '-' + tmp_arr[2]               # ambil index ke tiga biasanya /home/iwan/.virtualenv (index ke tiga ini biasanya uniq)
+                    #res += '-' + tmp_arr[2]               # ambil index ke tiga biasanya /home/iwan/.virtualenv (index ke tiga ini biasanya uniq)
+                    res_arr.append(tmp_arr[2])                    
                 else:
-                    res += '-' + tmp_arr[len(tmp_arr)-1]  # ambil index terakhir
+                    #res += '-' + tmp_arr[len(tmp_arr)-1]  # ambil index terakhir
+                    res_arr.append(tmp_arr[len(tmp_arr)-1])                    
 
+        # if self.DEBUG:
+        #     print('result:', res_arr)
+
+        # sampai tahap ini kemungkinan sama data array masih ada, jadi di clear lagi
+        res_arr = self.remove_duplicate_data_array(res_arr)
+        # if self.DEBUG:
+        #     print('result:', res_arr)
+
+        # ambil sampai index 3 saja sisanya di remove
+        # remove index terakhir
+        #while (len(res_arr) > 3):
+        #    res_arr.pop(len(res_arr)-1)                    
+        res_arr = res_arr[:3]        
         if self.DEBUG:
-            print('result:', res)
+            print('result:', res_arr)
 
-        return res     
+        return '-'.join(res_arr)
 
     def enc_environ(self, plain_text):
         # # mplaint_text = {
