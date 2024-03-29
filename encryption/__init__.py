@@ -497,14 +497,14 @@ class OutboxEncryption:
             # di server data ini kosong juga
             split_char = ['/', ' ', ':', '\\', '.']
             tmp = os.getenv(self.env_variable[i]) 
-            print('tmp', tmp)
+            # print('tmp', tmp)
 
             tmp_arr = None
             if tmp:                                
                 tmp_arr = self.split_from_multiple_word(tmp, split_char)
             
             if tmp_arr:                
-                print('tmp_arr', tmp_arr)
+                # print('tmp_arr', tmp_arr)
                 if len(tmp_arr)>=3:
                     #res += '-' + tmp_arr[2]               # ambil index ke tiga biasanya /home/iwan/.virtualenv (index ke tiga ini biasanya uniq)
                     res_arr.append(tmp_arr[2])                    
@@ -669,7 +669,6 @@ class OutboxEncryption:
             # mode non DEBUG juga munculin pesan ini
             print('File is not exists', file_path)
         else:
-
             env_config = Config(RepositoryEnv(file_path))            
             print('Load setting from ' + file_name)
             
