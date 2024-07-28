@@ -305,9 +305,9 @@ class OutboxEncryption:
                 # env_list = '((outbox:3.10)) '
                 # env_list = "(env_outbox) \[\033[0;37m\]$(date +%H:%M) \w\[\033[0;33m\] $(parse_git_branch)\[\033[1;32m\]$ \[\033[0;37m\]"
                 if env_list:
-                    env_list_split = env_list.split('\[')
+                    env_list_split = env_list.split("\\[")
                     for i in env_list_split:
-                        for k in i.split('\]'):
+                        for k in i.split("\\]"):
                             env_list_split2.append(self.string_replace_env(k))  # clear tanda (()) di dalam env
 
 
@@ -437,6 +437,7 @@ class OutboxEncryption:
         i=0
         while i<len(data_array):
             if data_array[i].strip() == '':
+            # if not data_array[i]:
                 data_array.pop(i)
             else:
                 i+=1                
@@ -457,7 +458,7 @@ class OutboxEncryption:
         return data_array
 
 
-    def split_from_multiple_word(self, data, split_word):
+    def split_from_multiple_word(self, data, split_word, is_remove_duplicate=True):
         '''
             split char, in array
         '''
@@ -468,24 +469,54 @@ class OutboxEncryption:
 
         # result
         tmp = data.split('_')       
+        # if self.DEBUG:
+        #     print('Split', tmp)
+
+        # split char - too
+        tmp2 = []
+        for i in range(len(tmp)):
+            if tmp[i]:
+                # tmp3 = tmp[i]
+                # tmp3 = tmp3.split('-')
+                tmp2 += tmp[i].split('-')
+                # print('$', tmp3)
+            # tmp2.append(tmp[i].split['-'])
+            # print('Split tmp2', tmp2)
+        # print('tmp2', tmp2)
         if self.DEBUG:
-            print('Split', tmp)
+            print('Split', tmp2)
 
         # remove empty data
-        tmp = self.remove_empty_data_array(tmp)
+        tmp = self.remove_empty_data_array(tmp2)
         if self.DEBUG:
             print('Remove empty array', tmp)
 
         # remove duplicate word
-        tmp = self.remove_duplicate_data_array(tmp)
-        if self.DEBUG:
-            print('Remove duplicate array', tmp)
+        if is_remove_duplicate:
+            tmp = self.remove_duplicate_data_array(tmp)
+            if self.DEBUG:
+                print('Remove duplicate array', tmp)
 
         return tmp
 
 
     def scan_environment_variable(self):
         res = '.env'    # jika semua kosong, maka paling tidak file .env harus ada
+        # print('BASE DIR!!', self.BASE_DIR)
+        # ganti .env dengan karakter terakhir dari nama folder tempat project berada
+        # menjadi .encryption jika di folder django_encryption
+        tmp_dir = self.split_from_multiple_word(str(self.BASE_DIR), ['/'], False)
+        # print('tmp_dir !', tmp_dir)
+        tmp_last = tmp_dir[len(tmp_dir)-1]
+        # print('tmp_dir !', tmp_last)
+        # split_char = 
+        tmp_dir = self.split_from_multiple_word(tmp_last, ['_', ' '], False)
+        # print('tmp_dir final', tmp_dir)
+        if tmp_dir:
+            res = '.' + tmp_dir[0]
+
+        # -----------------------------------------------------------------------------------
+
         res_arr = []    # tampung dulu ke variable array ini, untuk di ambil 3 kata pertama
         res_arr.append(res)
 
@@ -849,13 +880,8 @@ if __name__=='__main__':
     #         'default': {
     #             'ENGINE': tmp_engine,                
     #             'NAME': key['DB_NAME'],   # Path lengkap
-    #         }
-    #     }
-    # else: # default 
-    #     DATABASES = {
-    #         'default': {
-    #             'ENGINE'    : key['DB_ENGINE'],
-    #             'NAME'      : key['DB_NAME'],
+    #         }You must either define the environment variable DJANGO_SETTINGS_MODULE or call settings.configure() before accessing settings.
+
     #             'USER'      : key['DB_USER'],
     #             'PASSWORD'  : key['DB_PASSWORD'],
     #             'HOST'      : key['DB_HOST'],

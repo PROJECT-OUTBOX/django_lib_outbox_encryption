@@ -1,0 +1,38 @@
+# Environment file, create using outbox-encryption library 
+# > pip install outbox-encryption 
+
+# Setting section (change manually) :
+# -----------------------------------
+DEBUG=True 
+UNDER_CONSTRUCTION=False 
+
+# Change between mysql or sqlite3 
+DB_ENGINE=django.db.backends.mysql 
+#DB_ENGINE=django.db.backends.sqlite3 
+
+# Change to full path, if using sqlite3 
+DB_NAME=db_outbox 
+#DB_NAME=/home/db_outbox.sqlite3 
+
+# This setting, ignored when use sqlite3 
+DB_USER=root 
+DB_HOST=127.0.0.1 
+DB_PORT=3306 
+
+# All allowed host, separate with comma 
+ALLOWED_HOSTS=127.0.0.1, localhost 
+
+# Optional Static and media (change on vhost too) 
+STATIC_ROOT=/home/u10xxx/public_html/static/ 
+MEDIA_ROOT=/home/u1578244/public_html/media/ 
+
+# Optional for django >4.0 separate with comma 
+CSRF_TRUSTED_ORIGINS=https://domain-example.com, https://*.subdomain.com  
+
+# Encrypt section :
+# -----------------
+DB_PASSWORD=674141414141426d705a52394241657a4f6a496f3341686764427532694a52566e68366647623063645a6267314745687a4669636733546e62336d4f6d4d5946723062456834395870574c51575f57663643506d6a3473594b6d354559454d5072413d3d
+SECRET_KEY=674141414141426d705a52395f6b784e6a7937413046344b6a7a3563557a336c565479415549742d4d33587a44696341522d63434c735945663575336d6a596450304c46426c305a472d3332424735654d5164786738627346566f696a35785538513d3d
+DB_KEY=6a4c35666c5156423936315a764c51545846377445593844466c316d76715546375a6b5247356a783475453d
+
+# End of file 

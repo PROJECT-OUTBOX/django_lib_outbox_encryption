@@ -1,3 +1,7 @@
+Revisi v1.1.6:
+    # ubah .env menjadi .[kata terakhir dari folder tempat project berada]
+    # ini untuk membedakan di server source code yg sama tetapi dengan nama folder berbeda2
+
 Revisi v1.1.2
 Tetapkan versi cryptography==38.0.1
 Jika tidak maka akan error :
